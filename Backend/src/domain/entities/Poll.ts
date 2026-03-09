@@ -100,7 +100,6 @@ export class Poll {
             }
         }
 
-        // CASE: New Vote
         option.addVote();
         this._votedUserIds.add(userId);
         this._votes.set(userId, optionId);

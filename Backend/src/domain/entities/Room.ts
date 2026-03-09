@@ -56,10 +56,10 @@ export class Room {
     // ---------- Poll Logic ----------
 
     public createPoll(poll: Poll): void {
-        const hasActive = this._polls.some(p => p.isActive);
-        if (hasActive) {
-            throw new Error("There is already an active poll. Close it first.");
-        }
+        // const hasActive = this._polls.some(p => p.isActive);
+        // if (hasActive) {
+        //     throw new Error("There is already an active poll. Close it first.");
+        // }
         this._polls.push(poll);
     }
 

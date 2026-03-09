@@ -1,5 +1,5 @@
-import { Server, Socket } from "socket.io";
 import { singleton, inject } from "tsyringe";
+import { Server, Socket } from "socket.io";
 import http from "http";
 import { ICreatePollUseCase, IVoteUseCase } from "../../app/interfaces/usecases/IRoomUseCase";
 import { DI_TOKENS } from "../../domain/constants/identifier";

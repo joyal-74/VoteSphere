@@ -6,7 +6,8 @@
     "moduleResolution": "Bundler",
     "target": "ESNext",
     "types": [
-      "node"
+      "node",
+      "reflect-metadata"
     ],
     "sourceMap": true,
     "noUncheckedIndexedAccess": true,

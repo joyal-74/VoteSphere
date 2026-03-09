@@ -16,6 +16,17 @@ export const adaptRoute = (controllerMethod: (req: IHttpRequest) => Promise<any>
 
         try {
             const httpResponse = await controllerMethod(httpRequest);
+
+            if (httpResponse.logout) {
+                const clearOptions = {
+                    httpOnly: true,
+                    secure: process.env.NODE_ENV === 'production',
+                    sameSite: 'lax' as const,
+                    path: '/',
+                };
+                res.clearCookie('accessToken', clearOptions);
+                res.clearCookie('refreshToken', clearOptions);
+            }
             
             const responseData = httpResponse.body?.data;
 

@@ -1,9 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { loginUser, signUpUser } from '../features/auth/authThunks';
+import { loginUser, logoutUser, signUpUser } from '../features/auth/authThunks';
 import type { AppDispatch, RootState } from '../app/store';
 import { toast } from 'sonner';
 import { getUserRooms } from '../features/room/roomThunks';
+import { useCallback } from 'react';
+import { logout } from '../features/auth/authSlice';
 
 export const useAuth = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -18,7 +20,7 @@ export const useAuth = () => {
         if (loginUser.fulfilled.match(result)) {
             const roomsAction = await dispatch(getUserRooms());
             const userRooms = roomsAction.payload;
-            
+
             if (userRooms && userRooms.length > 0) {
                 navigate(`/rooms/${userRooms[0].id}`);
             } else {
@@ -42,5 +44,21 @@ export const useAuth = () => {
         }
     };
 
-    return { handleLogin, handleSignUp, loading, user, error };
+    const handleLogout = useCallback(async () => {
+        try {
+            await dispatch(logoutUser()).unwrap();
+
+            dispatch(logout());
+
+            toast.success('Logged out successfully');
+            navigate('/login');
+        } catch (err) {
+            console.log(err)
+            dispatch(logout());
+            navigate('/login');
+            toast.error('Session cleared');
+        }
+    }, [dispatch, navigate]);
+
+    return { handleLogin, handleSignUp, handleLogout, loading, user, error };
 };

@@ -24,13 +24,15 @@ export const useRoom = () => {
     const handleCreateRoom = async (roomName: string) => {
         if (!roomName.trim()) return toast.error("Room name is required");
 
-        const result = await dispatch(createRoom(roomName));
+        try {
+            const data = await dispatch(createRoom(roomName)).unwrap();
 
-        if (createRoom.fulfilled.match(result)) {
+            console.log("Room ID:", data.id);
             toast.success(`Room "${roomName}" created`);
-            navigate(`/room/${result.payload.id}`);
-        } else {
-            toast.error(result.payload as string || 'Failed to create room');
+
+            navigate(`/rooms/${data.id}`);
+        } catch (err) {
+            toast.error(err as string || 'Failed to create room');
         }
     };
 
@@ -41,7 +43,7 @@ export const useRoom = () => {
         if (joinRoom.fulfilled.match(result)) {
             const data = result.payload;
             toast.success(`Joined "${data?.title || 'Room'}"`);
-            navigate(`/room/${data.id}`);
+            navigate(`/rooms/${data.id}`);
         } else {
             toast.error(result.payload as string || 'Failed to join room');
         }

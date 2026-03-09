@@ -36,3 +36,15 @@ export const getCurrentUser = createAsyncThunk(
         }
     }
 );
+
+export const logoutUser = createAsyncThunk(
+    'auth/logout',
+    async (_, { rejectWithValue }) => {
+        try {
+            await api.post('/auth/logout'); 
+            return true;
+        } catch (err: any) {
+            return rejectWithValue(err.response?.data?.message || 'Logout failed');
+        }
+    }
+);

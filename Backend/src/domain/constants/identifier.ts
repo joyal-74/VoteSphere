@@ -8,6 +8,8 @@ const UseCaseTokens = {
     CreateUserUseCase: Symbol.for('CreateUserUseCase'),
     LoginUserUseCase: Symbol.for('LoginUserUseCase'),
     FindUserUseCase: Symbol.for('FindUserUseCase'),
+    LogoutUseCase: Symbol.for('LogoutUseCase'),
+
 
     CreateRoomUseCase: Symbol.for('CreateRoomUseCase'),
     JoinRoomUseCase: Symbol.for('JoinRoomUseCase'),

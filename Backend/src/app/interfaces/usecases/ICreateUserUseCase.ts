@@ -9,6 +9,10 @@ export interface ILoginUserUseCase {
     execute(data: LoginUserDTO): Promise<User>;
 }
 
+export interface ILogoutUseCase {
+    execute(userId: string): Promise<void>;
+}
+
 export interface IFindUserUseCase {
     execute(userId: string): Promise<User>;
 }

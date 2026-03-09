@@ -1,6 +1,6 @@
 import { injectable, inject } from "tsyringe";
 import { DI_TOKENS } from "../../../domain/constants/identifier";
-import { ICreateUserUseCase, IFindUserUseCase, ILoginUserUseCase } from "../../../app/interfaces/usecases/ICreateUserUseCase";
+import { ICreateUserUseCase, IFindUserUseCase, ILoginUserUseCase, ILogoutUseCase } from "../../../app/interfaces/usecases/ICreateUserUseCase";
 import { IHttpRequest } from "../interfaces/IHttp";
 import { HttpResponse, IHttpResult } from "../../../infra/utils/HttpResponse";
 import { TokenService } from "../../../infra/services/TokenService";
@@ -12,6 +12,7 @@ export class AuthController {
         @inject(DI_TOKENS.CreateUserUseCase) private _createUserUseCase: ICreateUserUseCase,
         @inject(DI_TOKENS.LoginUserUseCase) private _loginUserUseCase: ILoginUserUseCase,
         @inject(DI_TOKENS.FindUserUseCase) private _findUserUseCase: IFindUserUseCase,
+        @inject(DI_TOKENS.LogoutUseCase) private _logoutUseCase: ILogoutUseCase,
         @inject(DI_TOKENS.TokenService) private _tokenService: TokenService
     ) { }
 
@@ -71,9 +72,20 @@ export class AuthController {
             throw new AppError("Not authenticated", 401);
         }
 
-        // You might need an IFindUserByIdUseCase here
         const user = await this._findUserUseCase.execute(userId);
 
         return HttpResponse.ok({ user: user.getSnapshot() });
+    };
+
+    public logout = async (request: IHttpRequest): Promise<IHttpResult> => {
+        const userId = request.userId;
+
+        if (!userId) {
+            throw new AppError("Not authenticated", 401);
+        }
+
+        await this._logoutUseCase.execute(userId);
+
+        return HttpResponse.ok({ message: "Logged out successfully" });
     };
 }

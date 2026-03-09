@@ -11,11 +11,13 @@ import { LoginUserUseCase } from "../../app/usecases/user/LoginUserUseCase";
 import { FindUserUseCase } from "../../app/usecases/user/FindUserUseCase";
 import { RoomDetailsUseCase } from "../../app/usecases/room/RoomDetailsUseCase";
 import { GetUserRoomsUsecase } from "../../app/usecases/room/GetUserRoomsUsecase";
+import { LogoutUseCase } from "../../app/usecases/user/LogoutUsecase";
 
 // user
 container.register(DI_TOKENS.CreateUserUseCase, { useClass: CreateUserUseCase });
 container.register(DI_TOKENS.LoginUserUseCase, { useClass: LoginUserUseCase });
 container.register(DI_TOKENS.FindUserUseCase, { useClass: FindUserUseCase });
+container.register(DI_TOKENS.LogoutUseCase, { useClass: LogoutUseCase });
 
 //room
 container.register(DI_TOKENS.CreateRoomUseCase, { useClass: CreateRoomUseCase });

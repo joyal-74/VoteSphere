@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "target": "ESNext",
+    "types": [
+      "node"
+    ],
+    "sourceMap": true,
+    "noUncheckedIndexedAccess": true,
+    "experimentalDecorators": true,
+    "strict": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.test.ts"
+  ]
+}

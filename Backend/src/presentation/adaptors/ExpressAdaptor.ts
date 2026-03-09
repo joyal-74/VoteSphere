@@ -16,40 +16,40 @@ export const adaptRoute = (controllerMethod: (req: IHttpRequest) => Promise<any>
 
         try {
             const httpResponse = await controllerMethod(httpRequest);
+            const isProd = process.env.NODE_ENV === 'production';
 
             if (httpResponse.logout) {
                 const clearOptions = {
                     httpOnly: true,
                     secure: process.env.NODE_ENV === 'production',
-                    sameSite: 'lax' as const,
+                    sameSite: isProd ? ('none' as const) : ('lax' as const),
                     path: '/',
                 };
                 res.clearCookie('accessToken', clearOptions);
                 res.clearCookie('refreshToken', clearOptions);
             }
-            
+
             const responseData = httpResponse.body?.data;
 
             if (responseData && responseData.accessToken && responseData.refreshToken) {
                 const { accessToken, refreshToken } = responseData;
 
 
-                const isProd = process.env.NODE_ENV === 'production';
                 const cookieOptions = {
                     httpOnly: true,
                     secure: isProd,
-                    sameSite: 'lax' as const,
+                    sameSite: isProd ? ('none' as const) : ('lax' as const),
                     path: '/',
                 };
 
-                res.cookie('accessToken', accessToken, { 
-                    ...cookieOptions, 
-                    maxAge: 15 * 60 * 1000 
+                res.cookie('accessToken', accessToken, {
+                    ...cookieOptions,
+                    maxAge: 15 * 60 * 1000
                 });
 
-                res.cookie('refreshToken', refreshToken, { 
-                    ...cookieOptions, 
-                    maxAge: 7 * 24 * 60 * 60 * 1000 
+                res.cookie('refreshToken', refreshToken, {
+                    ...cookieOptions,
+                    maxAge: 7 * 24 * 60 * 60 * 1000
                 });
 
                 delete responseData.accessToken;

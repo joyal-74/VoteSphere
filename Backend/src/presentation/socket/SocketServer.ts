@@ -20,9 +20,10 @@ export class SocketServer {
     ) { }
 
     public init(server: http.Server) {
+        const clientUrl = process.env.CLIENT_URL || "http://localhost:5173";
         this.io = new Server(server, {
             cors: {
-                origin: "http://localhost:5173",
+                origin: clientUrl,
                 credentials: true
             }
         });
@@ -55,7 +56,6 @@ export class SocketServer {
 
             socket.on("send_message", async (data: SendMessageDTO) => {
 
-                console.log(data)
                 try {
                     const savedMessage = await this._sendMessageUseCase.execute(data);
 

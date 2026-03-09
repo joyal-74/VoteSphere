@@ -3,10 +3,12 @@ import { io, } from 'socket.io-client';
 import { SocketContext } from '../contexts/SocketContext';
 
 export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    const URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
     const socket = useMemo(() =>
-        io("http://localhost:3000", {
+        io(URL, {
             withCredentials: true,
-        }), []);
+            transports: ['websocket', 'polling']
+        }), [URL]);
 
     const [isConnected, setIsConnected] = useState(socket.connected);
 

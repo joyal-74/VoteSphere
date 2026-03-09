@@ -55,7 +55,7 @@ const roomSlice = createSlice({
                     state.currentRoom.polls = [];
                 }
 
-                const exists = state.currentRoom.polls.some(p => p.id === action.payload.id);
+                const exists = state.currentRoom.polls.some((p : any) => p.id === action.payload.id);
 
                 if (!exists) {
                     state.currentRoom.polls.push(action.payload);
@@ -65,7 +65,7 @@ const roomSlice = createSlice({
 
         updatePollInRoom: (state, action: PayloadAction<any>) => {
             if (state.currentRoom?.polls) {
-                const index = state.currentRoom.polls.findIndex(p => p.id === action.payload.id);
+                const index = state.currentRoom.polls.findIndex((p : any) => p.id === action.payload.id);
                 if (index !== -1) {
                     state.currentRoom.polls[index] = action.payload;
                 }

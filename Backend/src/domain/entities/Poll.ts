@@ -12,6 +12,7 @@ export interface PollSnapshot {
         votes: number;
     }[];
     votedUserIds : string[];
+    votes: { userId: string; optionId: string }[];
 }
 
 export class Poll {
@@ -22,6 +23,7 @@ export class Poll {
     private _isActive: boolean;
     private readonly _createdAt: Date;
     private readonly _votedUserIds: Set<string>;
+    private _votes: Map<string, string>;
 
     constructor(params: {
         id: string;
@@ -52,6 +54,7 @@ export class Poll {
         this._isActive = true;
         this._createdAt = params.createdAt ?? new Date();
         this._votedUserIds = new Set();
+        this._votes = new Map();
     }
 
     get id(): string {
@@ -74,26 +77,33 @@ export class Poll {
 
 
     public vote(optionId: string, userId: string): void {
-        if (!this._isActive) {
-            throw new Error("Poll is closed.");
-        }
-
-        if (!userId || !userId.trim()) {
-            throw new Error("Invalid user.");
-        }
-
-        if (this._votedUserIds.has(userId)) {
-            throw new Error("User has already voted.");
-        }
-
+        if (!this._isActive) throw new Error("Poll is closed.");
+        
         const option = this._options.find(o => o.id === optionId);
+        if (!option) throw new Error("Invalid poll option.");
 
-        if (!option) {
-            throw new Error("Invalid poll option.");
+        // TOGGLE LOGIC: Check if user already voted
+        if (this._votedUserIds.has(userId)) {
+            const existingOptionId = this._votes.get(userId);
+
+            if (existingOptionId === optionId) {
+                option.removeVote();
+                this._votedUserIds.delete(userId);
+                this._votes.delete(userId);
+                return;
+            } else {
+                const oldOption = this._options.find(o => o.id === existingOptionId);
+                oldOption?.removeVote();
+                option.addVote();
+                this._votes.set(userId, optionId);
+                return;
+            }
         }
 
+        // CASE: New Vote
         option.addVote();
         this._votedUserIds.add(userId);
+        this._votes.set(userId, optionId);
     }
 
     public close(): void {
@@ -110,26 +120,26 @@ export class Poll {
         });
 
         poll._isActive = data.isActive;
-
-        data.votedUserIds?.forEach((id: string) => poll._votedUserIds.add(id));
+        
+        data.votes?.forEach((v: any) => {
+            poll._votedUserIds.add(v.userId);
+            poll._votes.set(v.userId, v.optionId);
+        });
 
         poll._options.forEach(option => {
             const savedOption = data.options.find((o: any) => o.id === option.id);
-            if (savedOption) {
-                option.restoreVotes(savedOption.votes);
-            }
+            if (savedOption) option.restoreVotes(savedOption.votes);
         });
 
         return poll;
     }
-
 
     public getSnapshot(): PollSnapshot {
         return {
             id: this._id,
             question: this._question,
             isActive: this._isActive,
-            createdBy : this._createdBy,
+            createdBy: this._createdBy,
             createdAt: this._createdAt,
             options: this._options.map(option => ({
                 id: option.id,
@@ -137,6 +147,11 @@ export class Poll {
                 votes: option.votes
             })),
             votedUserIds: Array.from(this._votedUserIds),
+
+            votes: Array.from(this._votes.entries()).map(([userId, optionId]) => ({
+                userId,
+                optionId
+            }))
         };
     }
 }

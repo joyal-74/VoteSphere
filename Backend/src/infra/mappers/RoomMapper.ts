@@ -26,11 +26,11 @@ export class RoomMapper {
                 createdAt: p.createdAt,
                 createdBy: p.createdBy,
                 options: p.options,
-                votedUserIds: p.votedUserIds
+                votedUserIds: p.votedUserIds,
+                votes: p.votes
             })
         );
 
-        // 2. Instantiate Room with the polls array
         const room = new Room({
             id: raw._id,
             title: raw.title,

@@ -77,10 +77,6 @@ export class Room {
             throw new Error("Poll not found.");
         }
 
-        // if (!poll.isActive) {
-        //     throw new Error("This poll is already closed.");
-        // }
-
         poll.vote(optionId, userId);
     }
 

@@ -15,24 +15,40 @@ export class PollMapper {
                 text: o.text,
                 votes: o.votes
             })),
-            votedUserIds: Array.from(poll["_votedUserIds"])
+            votedUserIds: snapshot.votedUserIds,
+            votes: snapshot.votes 
         };
     }
 
     static toDomain(raw: any): Poll {
         const poll = new Poll({
-            id: raw._id,
+            id: raw.id || raw._id,
             question: raw.question,
             options: raw.options.map((o: any) => ({
-                id: o._id,
+                id: o.id || o._id,
                 text: o.text
             })),
             createdAt: raw.createdAt,
-            createdBy : raw.createdBy
+            createdBy: raw.createdBy
         });
+
+        if (raw.isActive !== undefined) {
+            poll["_isActive"] = raw.isActive;
+        }
 
         raw.votedUserIds?.forEach((userId: string) => {
             poll["_votedUserIds"].add(userId);
+        });
+
+        raw.votes?.forEach((v: { userId: string, optionId: string }) => {
+            poll["_votes"].set(v.userId, v.optionId);
+        });
+
+        poll["_options"].forEach(option => {
+            const savedOption = raw.options.find((o: any) => (o.id || o._id) === option.id);
+            if (savedOption) {
+                option.restoreVotes(savedOption.votes);
+            }
         });
 
         return poll;

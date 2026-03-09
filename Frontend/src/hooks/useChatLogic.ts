@@ -15,6 +15,7 @@ export const useChatLogic = (roomId: string | undefined) => {
     const messages = useMemo(() => {
         return currentRoom?.messages || [];
     }, [currentRoom?.messages]);
+    console.log(messages)
 
     const [messageText, setMessageText] = useState("");
     const [typingUser, setTypingUser] = useState<string | null>(null);

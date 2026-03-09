@@ -30,7 +30,6 @@ export class EditMessageUseCase implements IEditMessageUseCase {
         }
         const snapshot = message.getSnapshot();
 
-        console.log(snapshot)
 
         await this.messageRepo.updateContent(
             snapshot.id,

@@ -34,8 +34,8 @@ export class SendMessageUseCase implements ISendMessageUseCase {
             parentMessageId: data.parentMessageId
         });
 
-        await this.messageRepo.create(message);
+        const savedMessage = await this.messageRepo.create(message);
 
-        return message.getSnapshot();
+        return savedMessage.getSnapshot();
     }
 }

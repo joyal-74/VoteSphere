@@ -9,12 +9,17 @@ interface RoomDocument {
     polls: Poll[];
     createdAt: Date;
 }
+
 const PollOptionSchema = new Schema({
     id: { type: String, required: true },
     text: { type: String, required: true },
     votes: { type: Number, default: 0 }
 }, { _id: false });
 
+const UserVoteSchema = new Schema({
+    userId: { type: String, required: true },
+    optionId: { type: String, required: true }
+}, { _id: false });
 
 const RoomSchema = new Schema<RoomDocument>({
     _id: { type: String, required: true },
@@ -28,7 +33,8 @@ const RoomSchema = new Schema<RoomDocument>({
         isActive: Boolean,
         createdAt: Date,
         options: [PollOptionSchema],
-        votedUserIds: [String]
+        votedUserIds: [String],
+        votes: [UserVoteSchema] 
     }],
     createdAt: { type: Date, default: Date.now }
 });

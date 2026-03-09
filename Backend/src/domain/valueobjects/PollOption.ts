@@ -28,8 +28,12 @@ export class PollOption {
     public addVote(): void {
         this._votes++;
     }
-    
-    public restoreVotes(count: number): void {
+
+    removeVote(): void {
+        if (this._votes > 0) this._votes--;
+    }
+
+    restoreVotes(count: number): void {
         this._votes = count;
     }
 }

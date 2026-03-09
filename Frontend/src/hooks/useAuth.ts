@@ -12,12 +12,24 @@ export const useAuth = () => {
     const navigate = useNavigate();
     const { user, loading, error } = useSelector((state: RootState) => state.auth);
 
+    const USERNAME_REGEX = /^[a-zA-Z0-9_]{3,16}$/;
+
+    const validateUsername = (username: string): string | null => {
+        const trimmed = username.trim();
+        if (!trimmed) return 'Username is required';
+        if (!USERNAME_REGEX.test(trimmed)) {
+            return 'Username must be 3-16 characters (letters, numbers, and underscores only)';
+        }
+        return null;
+    };
+
     const handleLogin = async (username: string) => {
-        if (!username.trim()) return toast.error('Enter a username');
+        const validationError = validateUsername(username);
+        if (validationError) return toast.error(validationError);
 
         try {
             await dispatch(loginUser({ username })).unwrap();
-            
+
             const userRooms = await dispatch(getUserRooms()).unwrap();
 
             if (userRooms?.length > 0) {
@@ -31,8 +43,8 @@ export const useAuth = () => {
     };
 
     const handleSignUp = async (username: string, avatar?: string) => {
-        console.log(avatar, 'jj')
-        if (!username.trim()) return toast.error('Username is required');
+        const validationError = validateUsername(username);
+        if (validationError) return toast.error(validationError);
 
         try {
             await dispatch(signUpUser({ username, avatar })).unwrap();

@@ -1,10 +1,10 @@
 import "reflect-metadata";
 import { container } from "tsyringe";
 
-export * from './providers'
-export * from './services'
-export * from './repositories'
-export * from './usecases'
+export * from './providers.js'
+export * from './services.js'
+export * from './repositories.js'
+export * from './usecases.js'
 
 console.log("✅ DI Container Initialized");
 

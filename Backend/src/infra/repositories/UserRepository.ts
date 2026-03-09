@@ -1,7 +1,7 @@
-import { IUserRepository } from "../../app/repositories/IUserRepository";
-import { User } from "../../domain/entities/User";
-import { UserModel } from "../database/models/UserModel";
-import { UserMapper } from "../mappers/UserMapper";
+import { IUserRepository } from "../../app/repositories/IUserRepository.js";
+import { User } from "../../domain/entities/User.js";
+import { UserModel } from "../database/models/UserModel.js";
+import { UserMapper } from "../mappers/UserMapper.js";
 
 export class UserRepository implements IUserRepository {
 

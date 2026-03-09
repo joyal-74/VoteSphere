@@ -1,4 +1,4 @@
-import { HttpStatusCode } from "../../domain/enums/StatusCodes"; 
+import { HttpStatusCode } from "../../domain/enums/StatusCodes.js"; 
 
 export interface IHttpResult {
     statusCode: number;

@@ -1,12 +1,12 @@
-import { Room } from "../../../domain/entities/Room";
+import { Room } from "../../../domain/entities/Room.js";
 
-import { ICreateRoomUseCase } from "../../interfaces/usecases/IRoomUseCase"; 
-import { CreateRoomDTO } from "../../../domain/dtos/CreateRoomDTO";
+import { ICreateRoomUseCase } from "../../interfaces/usecases/IRoomUseCase.js"; 
+import { CreateRoomDTO } from "../../../domain/dtos/CreateRoomDTO.js";
 import { inject, injectable } from "tsyringe";
-import { DI_TOKENS } from "../../../domain/constants/identifier";
-import { IRoomRepository } from "../../repositories/IRoomRepository";
-import { IUserRepository } from "../../repositories/IUserRepository";
-import { IIDGenerator } from "../../interfaces/IIDGenerator";
+import { DI_TOKENS } from "../../../domain/constants/identifier.js";
+import { IRoomRepository } from "../../repositories/IRoomRepository.js";
+import { IUserRepository } from "../../repositories/IUserRepository.js";
+import { IIDGenerator } from "../../interfaces/IIDGenerator.js";
 
 @injectable()
 export class CreateRoomUseCase implements ICreateRoomUseCase {

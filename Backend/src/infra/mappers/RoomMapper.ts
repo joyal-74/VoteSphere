@@ -1,6 +1,6 @@
-import { Room } from "../../domain/entities/Room";
-import { Poll } from "../../domain/entities/Poll";
-import { PollMapper } from "./PollMapper";
+import { Room } from "../../domain/entities/Room.js";
+import { Poll } from "../../domain/entities/Poll.js";
+import { PollMapper } from "./PollMapper.js";
 
 export class RoomMapper {
     static toPersistence(room: Room) {

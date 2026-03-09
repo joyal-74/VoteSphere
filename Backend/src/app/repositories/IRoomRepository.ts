@@ -1,4 +1,4 @@
-import { Room } from "../../domain/entities/Room";
+import { Room } from "../../domain/entities/Room.js";
 
 export interface IRoomRepository {
     save(room: Room): Promise<void>;

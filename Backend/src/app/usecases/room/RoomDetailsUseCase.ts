@@ -1,11 +1,10 @@
-import { IRoomRepository } from "../../repositories/IRoomRepository";
-import { IUserRepository } from "../../repositories/IUserRepository";
-import { IRoomDetailsUseCase } from "../../interfaces/usecases/IRoomUseCase";
-import { RoomDTO, RoomWithMessages } from "../../../domain/dtos/JoinRoomDTO";
-import { Room } from "../../../domain/entities/Room";
+import { IRoomRepository } from "../../repositories/IRoomRepository.js";
+import { IUserRepository } from "../../repositories/IUserRepository.js";
+import { IRoomDetailsUseCase } from "../../interfaces/usecases/IRoomUseCase.js";
+import { RoomDTO, RoomWithMessages } from "../../../domain/dtos/JoinRoomDTO.js";
 import { inject, injectable } from "tsyringe";
-import { DI_TOKENS } from "../../../domain/constants/identifier";
-import { IMessageRepository } from "../../repositories/IMessageRepository";
+import { DI_TOKENS } from "../../../domain/constants/identifier.js";
+import { IMessageRepository } from "../../repositories/IMessageRepository.js";
 
 @injectable()
 export class RoomDetailsUseCase implements IRoomDetailsUseCase {

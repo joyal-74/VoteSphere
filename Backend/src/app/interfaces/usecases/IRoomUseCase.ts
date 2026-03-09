@@ -1,9 +1,9 @@
-import { CreatePollDTO } from "../../../domain/dtos/CreatePollDTO";
-import { CreateRoomDTO } from "../../../domain/dtos/CreateRoomDTO";
-import { JoinRoomDTO, RoomDTO, RoomWithMessages } from "../../../domain/dtos/JoinRoomDTO";
-import { VoteDTO } from "../../../domain/dtos/VoteDTO";
-import { PollSnapshot } from "../../../domain/entities/Poll";
-import { Room, RoomSnapshot } from "../../../domain/entities/Room";
+import { CreatePollDTO } from "../../../domain/dtos/CreatePollDTO.js";
+import { CreateRoomDTO } from "../../../domain/dtos/CreateRoomDTO.js";
+import { JoinRoomDTO, RoomDTO, RoomWithMessages } from "../../../domain/dtos/JoinRoomDTO.js";
+import { VoteDTO } from "../../../domain/dtos/VoteDTO.js";
+import { PollSnapshot } from "../../../domain/entities/Poll.js";
+import { Room, RoomSnapshot } from "../../../domain/entities/Room.js";
 
 export interface ICreateRoomUseCase {
     execute(data: CreateRoomDTO): Promise<Room>;

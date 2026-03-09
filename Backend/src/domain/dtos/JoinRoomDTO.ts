@@ -1,5 +1,5 @@
-import { Message } from "../entities/Message";
-import { Room } from "../entities/Room";
+import { Message } from "../entities/Message.js";
+import { Room } from "../entities/Room.js";
 
 export interface RoomDTO {
     roomId: string;

@@ -1,5 +1,5 @@
 import { customAlphabet } from 'nanoid';
-import { IIDGenerator } from '../../app/interfaces/IIDGenerator';
+import { IIDGenerator } from '../../app/interfaces/IIDGenerator.js';
 
 const alphabet = '2346789ABCDEFGHJKLMNPQRTUVWXYabcdefghijkmnopqrstuvwxyz';
 

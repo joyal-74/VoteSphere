@@ -1,8 +1,8 @@
 import { Router } from "express";
 import { container } from "tsyringe";
-import { adaptRoute } from "../../adaptors/ExpressAdaptor";
-import { RoomController } from "../../http/controllers/RoomController";
-import { protect } from "../middleware/AuthMiddleware";
+import { adaptRoute } from "../../adaptors/ExpressAdaptor.js";
+import { RoomController } from "../../http/controllers/RoomController.js";
+import { protect } from "../middleware/AuthMiddleware.js";
 
 
 const router = Router();

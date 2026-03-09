@@ -1,6 +1,6 @@
 import { container } from "tsyringe";
 import http from "http";
-import { SocketServer } from "./SocketServer";
+import { SocketServer } from "./SocketServer.js";
 
 export const initSocket = (server: http.Server) => {
     const socketServer = container.resolve(SocketServer); 

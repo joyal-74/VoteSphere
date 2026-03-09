@@ -1,9 +1,9 @@
 import { injectable, inject } from "tsyringe";
-import { DI_TOKENS } from "../../../domain/constants/identifier";
-import { ICreateRoomUseCase, IGetUserRoomsUsecase, IJoinRoomUseCase, IRoomDetailsUseCase, IVoteUseCase } from "../../../app/interfaces/usecases/IRoomUseCase";
-import { IHttpRequest } from "../interfaces/IHttp";
-import { HttpResponse } from "../../../infra/utils/HttpResponse";
-import { AppError } from "../../../domain/errors/AppError";
+import { DI_TOKENS } from "../../../domain/constants/identifier.js";
+import { ICreateRoomUseCase, IGetUserRoomsUsecase, IJoinRoomUseCase, IRoomDetailsUseCase, IVoteUseCase } from "../../../app/interfaces/usecases/IRoomUseCase.js";
+import { IHttpRequest } from "../interfaces/IHttp.js";
+import { HttpResponse } from "../../../infra/utils/HttpResponse.js";
+import { AppError } from "../../../domain/errors/AppError.js";
 
 
 @injectable()
@@ -50,7 +50,7 @@ export class RoomController {
 
         const { room, messages } = result;
 
-        const cleanMessages = messages.map(message => message.getSnapshot());
+        const cleanMessages = messages.map((message : any) => message.getSnapshot());
 
         return HttpResponse.ok({ ...room.getSnapshot(), messages: cleanMessages });
     }

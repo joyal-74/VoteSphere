@@ -1,8 +1,8 @@
 import { inject, injectable } from "tsyringe";
-import { ILogoutUseCase } from "../../interfaces/usecases/ICreateUserUseCase";
-import { IUserRepository } from "../../repositories/IUserRepository";
-import { DI_TOKENS } from "../../../domain/constants/identifier";
-import { AppError } from "../../../domain/errors/AppError";
+import { ILogoutUseCase } from "../../interfaces/usecases/ICreateUserUseCase.js";
+import { IUserRepository } from "../../repositories/IUserRepository.js";
+import { DI_TOKENS } from "../../../domain/constants/identifier.js";
+import { AppError } from "../../../domain/errors/AppError.js";
 
 @injectable()
 export class LogoutUseCase implements ILogoutUseCase {

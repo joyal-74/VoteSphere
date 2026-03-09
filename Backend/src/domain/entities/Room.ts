@@ -1,4 +1,4 @@
-import { Poll } from "./Poll";
+import { Poll } from "./Poll.js";
 
 export interface RoomSnapshot {
     id: string;

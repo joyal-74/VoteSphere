@@ -1,4 +1,4 @@
-import { Poll } from "../../domain/entities/Poll";
+import { Poll } from "../../domain/entities/Poll.js";
 
 export class PollMapper {
     static toPersistence(poll: Poll) {

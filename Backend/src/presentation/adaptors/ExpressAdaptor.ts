@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { IHttpRequest } from "../http/interfaces/IHttp";
-import { AppError } from "../../domain/errors/AppError";
-import { HttpStatusCode } from "../../domain/enums/StatusCodes";
-import { buildResponse } from "../../infra/utils/ResponseBuilder";
+import { IHttpRequest } from "../http/interfaces/IHttp.js";
+import { AppError } from "../../domain/errors/AppError.js";
+import { HttpStatusCode } from "../../domain/enums/StatusCodes.js";
+import { buildResponse } from "../../infra/utils/ResponseBuilder.js";
 
 export const adaptRoute = (controllerMethod: (req: IHttpRequest) => Promise<any>) => {
     return async (req: Request, res: Response) => {

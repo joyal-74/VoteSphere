@@ -1,10 +1,10 @@
 import { inject, injectable } from "tsyringe";
-import { CreateUserDTO } from "../../../domain/dtos/UserDTO";
-import { User } from "../../../domain/entities/User";
-import { ILoginUserUseCase } from "../../interfaces/usecases/ICreateUserUseCase";
-import { IUserRepository } from "../../repositories/IUserRepository";
-import { DI_TOKENS } from "../../../domain/constants/identifier";
-import { BadRequestError } from "../../../domain/errors";
+import { CreateUserDTO } from "../../../domain/dtos/UserDTO.js";
+import { User } from "../../../domain/entities/User.js";
+import { ILoginUserUseCase } from "../../interfaces/usecases/ICreateUserUseCase.js";
+import { IUserRepository } from "../../repositories/IUserRepository.js";
+import { DI_TOKENS } from "../../../domain/constants/identifier.js";
+import { BadRequestError } from "../../../domain/errors/index.js";
 
 @injectable()
 export class LoginUserUseCase implements ILoginUserUseCase {

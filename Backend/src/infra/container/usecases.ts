@@ -1,17 +1,17 @@
 import { container } from "tsyringe";
-import { DI_TOKENS } from "../../domain/constants/identifier";
-import { CreateUserUseCase } from "../../app/usecases/user/CreateUserUseCase";
-import { SendMessageUseCase } from "../../app/usecases/chat/SendMessageUseCase";
-import { CreateRoomUseCase } from "../../app/usecases/room/CreateRoomUseCase";
-import { JoinRoomUseCase } from "../../app/usecases/room/JoinRoomUseCases";
-import { CreatePollUseCase } from "../../app/usecases/poll/CreatePollUseCase";
-import { VoteUseCase } from "../../app/usecases/poll/VoteUseCase";
-import { EditMessageUseCase } from "../../app/usecases/chat/EditMessageUseCase";
-import { LoginUserUseCase } from "../../app/usecases/user/LoginUserUseCase";
-import { FindUserUseCase } from "../../app/usecases/user/FindUserUseCase";
-import { RoomDetailsUseCase } from "../../app/usecases/room/RoomDetailsUseCase";
-import { GetUserRoomsUsecase } from "../../app/usecases/room/GetUserRoomsUsecase";
-import { LogoutUseCase } from "../../app/usecases/user/LogoutUsecase";
+import { DI_TOKENS } from "../../domain/constants/identifier.js";
+import { CreateUserUseCase } from "../../app/usecases/user/CreateUserUseCase.js";
+import { SendMessageUseCase } from "../../app/usecases/chat/SendMessageUseCase.js";
+import { CreateRoomUseCase } from "../../app/usecases/room/CreateRoomUseCase.js";
+import { JoinRoomUseCase } from "../../app/usecases/room/JoinRoomUseCases.js";
+import { CreatePollUseCase } from "../../app/usecases/poll/CreatePollUseCase.js";
+import { VoteUseCase } from "../../app/usecases/poll/VoteUseCase.js";
+import { EditMessageUseCase } from "../../app/usecases/chat/EditMessageUseCase.js";
+import { LoginUserUseCase } from "../../app/usecases/user/LoginUserUseCase.js";
+import { FindUserUseCase } from "../../app/usecases/user/FindUserUseCase.js";
+import { RoomDetailsUseCase } from "../../app/usecases/room/RoomDetailsUseCase.js";
+import { GetUserRoomsUsecase } from "../../app/usecases/room/GetUserRoomsUsecase.js";
+import { LogoutUseCase } from "../../app/usecases/user/LogoutUsecase.js";
 
 // user
 container.register(DI_TOKENS.CreateUserUseCase, { useClass: CreateUserUseCase });

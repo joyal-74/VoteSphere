@@ -1,4 +1,4 @@
-import { Message } from "../../domain/entities/Message";
+import { Message } from "../../domain/entities/Message.js";
 
 export class MessageMapper {
     static toPersistence(message: Message) {

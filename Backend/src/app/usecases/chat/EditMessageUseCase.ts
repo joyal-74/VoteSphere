@@ -1,9 +1,9 @@
 import { inject, injectable } from "tsyringe";
-import { DI_TOKENS } from "../../../domain/constants/identifier";
-import { IMessageRepository } from "../../repositories/IMessageRepository";
-import { ForbiddenError, NotFoundError } from "../../../domain/errors";
-import { IEditMessageUseCase } from "../../interfaces/usecases/IMessagesUsecase";
-import { MessageSnapshot } from "../../../domain/entities/Message";
+import { DI_TOKENS } from "../../../domain/constants/identifier.js";
+import { IMessageRepository } from "../../repositories/IMessageRepository.js";
+import { ForbiddenError, NotFoundError } from "../../../domain/errors/index.js";
+import { IEditMessageUseCase } from "../../interfaces/usecases/IMessagesUsecase.js";
+import { MessageSnapshot } from "../../../domain/entities/Message.js";
 
 @injectable()
 export class EditMessageUseCase implements IEditMessageUseCase {

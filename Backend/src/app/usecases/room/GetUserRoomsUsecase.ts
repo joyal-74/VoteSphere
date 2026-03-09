@@ -1,9 +1,9 @@
-import { IRoomRepository } from "../../repositories/IRoomRepository";
-import { IUserRepository } from "../../repositories/IUserRepository";
-import { IGetUserRoomsUsecase } from "../../interfaces/usecases/IRoomUseCase";
-import { Room } from "../../../domain/entities/Room";
+import { IRoomRepository } from "../../repositories/IRoomRepository.js";
+import { IUserRepository } from "../../repositories/IUserRepository.js";
+import { IGetUserRoomsUsecase } from "../../interfaces/usecases/IRoomUseCase.js";
+import { Room } from "../../../domain/entities/Room.js";
 import { inject, injectable } from "tsyringe";
-import { DI_TOKENS } from "../../../domain/constants/identifier";
+import { DI_TOKENS } from "../../../domain/constants/identifier.js";
 
 @injectable()
 export class GetUserRoomsUsecase implements IGetUserRoomsUsecase {

@@ -1,11 +1,11 @@
 import { injectable, inject } from "tsyringe";
-import { DI_TOKENS } from "../../../domain/constants/identifier";
-import { IMessageRepository } from "../../repositories/IMessageRepository";
-import { IRoomRepository } from "../../repositories/IRoomRepository";
-import { Message, MessageSnapshot } from "../../../domain/entities/Message";
-import { BadRequestError, NotFoundError } from "../../../domain/errors";
-import { SendMessageDTO } from "../../../domain/dtos/MessageDTO";
-import { ISendMessageUseCase } from "../../interfaces/usecases/IMessagesUsecase";
+import { DI_TOKENS } from "../../../domain/constants/identifier.js";
+import { IMessageRepository } from "../../repositories/IMessageRepository.js";
+import { IRoomRepository } from "../../repositories/IRoomRepository.js";
+import { Message, MessageSnapshot } from "../../../domain/entities/Message.js";
+import { BadRequestError, NotFoundError } from "../../../domain/errors/index.js";
+import { SendMessageDTO } from "../../../domain/dtos/MessageDTO.js";
+import { ISendMessageUseCase } from "../../interfaces/usecases/IMessagesUsecase.js";
 
 
 @injectable()

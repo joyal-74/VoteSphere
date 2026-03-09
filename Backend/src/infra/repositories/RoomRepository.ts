@@ -1,7 +1,7 @@
-import { IRoomRepository } from "../../app/repositories/IRoomRepository";
-import { Room } from "../../domain/entities/Room";
-import { RoomModel } from "../database/models/RoomModel";
-import { RoomMapper } from "../mappers/RoomMapper";
+import { IRoomRepository } from "../../app/repositories/IRoomRepository.js";
+import { Room } from "../../domain/entities/Room.js";
+import { RoomModel } from "../database/models/RoomModel.js";
+import { RoomMapper } from "../mappers/RoomMapper.js";
 
 export class RoomRepository implements IRoomRepository {
     async save(room: Room): Promise<any> {

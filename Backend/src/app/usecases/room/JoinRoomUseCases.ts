@@ -1,10 +1,10 @@
-import { IRoomRepository } from "../../repositories/IRoomRepository";
-import { IUserRepository } from "../../repositories/IUserRepository";
-import { IJoinRoomUseCase } from "../../interfaces/usecases/IRoomUseCase";
-import { JoinRoomDTO } from "../../../domain/dtos/JoinRoomDTO";
-import { Room } from "../../../domain/entities/Room";
+import { IRoomRepository } from "../../repositories/IRoomRepository.js";
+import { IUserRepository } from "../../repositories/IUserRepository.js";
+import { IJoinRoomUseCase } from "../../interfaces/usecases/IRoomUseCase.js";
+import { JoinRoomDTO } from "../../../domain/dtos/JoinRoomDTO.js";
+import { Room } from "../../../domain/entities/Room.js";
 import { inject, injectable } from "tsyringe";
-import { DI_TOKENS } from "../../../domain/constants/identifier";
+import { DI_TOKENS } from "../../../domain/constants/identifier.js";
 
 @injectable()
 export class JoinRoomUseCase implements IJoinRoomUseCase {

@@ -1,12 +1,12 @@
 import { singleton, inject } from "tsyringe";
 import { Server, Socket } from "socket.io";
 import http from "http";
-import { ICreatePollUseCase, IVoteUseCase } from "../../app/interfaces/usecases/IRoomUseCase";
-import { DI_TOKENS } from "../../domain/constants/identifier";
-import { VoteDTO } from "../../domain/dtos/VoteDTO";
-import { IEditMessageUseCase, ISendMessageUseCase } from "../../app/interfaces/usecases/IMessagesUsecase";
-import { SendMessageDTO } from "../../domain/dtos/MessageDTO";
-import { CreatePollDTO } from "../../domain/dtos/CreatePollDTO";
+import { ICreatePollUseCase, IVoteUseCase } from "../../app/interfaces/usecases/IRoomUseCase.js";
+import { DI_TOKENS } from "../../domain/constants/identifier.js";
+import { VoteDTO } from "../../domain/dtos/VoteDTO.js";
+import { IEditMessageUseCase, ISendMessageUseCase } from "../../app/interfaces/usecases/IMessagesUsecase.js";
+import { SendMessageDTO } from "../../domain/dtos/MessageDTO.js";
+import { CreatePollDTO } from "../../domain/dtos/CreatePollDTO.js";
 
 @singleton()
 export class SocketServer {

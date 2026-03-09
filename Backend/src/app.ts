@@ -1,9 +1,9 @@
 import "reflect-metadata";
-import "./infra/container/index";
+import "./infra/container/index.js";
 import express from 'express';
 import cors from "cors";
 import morgan from "morgan";
-import v1Router from './presentation/express/routes/v1/index'
+import v1Router from './presentation/express/routes/v1/index.js'
 import cookieParser from "cookie-parser";
 
 

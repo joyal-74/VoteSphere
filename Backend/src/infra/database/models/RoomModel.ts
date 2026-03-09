@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { Poll } from "../../../domain/entities/Poll";
+import { Poll } from "../../../domain/entities/Poll.js";
 
 interface RoomDocument {
     _id: string;

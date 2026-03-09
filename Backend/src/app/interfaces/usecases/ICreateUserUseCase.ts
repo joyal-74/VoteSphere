@@ -1,5 +1,5 @@
-import { CreateUserDTO, LoginUserDTO } from "../../../domain/dtos/UserDTO";
-import { User } from "../../../domain/entities/User";
+import { CreateUserDTO, LoginUserDTO } from "../../../domain/dtos/UserDTO.js";
+import { User } from "../../../domain/entities/User.js";
 
 export interface ICreateUserUseCase {
     execute(data: CreateUserDTO): Promise<User>;

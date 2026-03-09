@@ -1,4 +1,4 @@
-import { PollOption } from "../valueobjects/PollOption";
+import { PollOption } from "../valueobjects/PollOption.js";
 
 export interface PollSnapshot {
     id: string;

@@ -1,11 +1,11 @@
 import { inject, injectable } from "tsyringe";
-import { CreatePollDTO } from "../../../domain/dtos/CreatePollDTO";
-import { Poll } from "../../../domain/entities/Poll";
-import { IIDGenerator } from "../../interfaces/IIDGenerator";
-import { ICreatePollUseCase } from "../../interfaces/usecases/IRoomUseCase";
-import { IRoomRepository } from "../../repositories/IRoomRepository";
-import { DI_TOKENS } from "../../../domain/constants/identifier";
-import { RoomSnapshot } from "../../../domain/entities/Room";
+import { CreatePollDTO } from "../../../domain/dtos/CreatePollDTO.js";
+import { Poll } from "../../../domain/entities/Poll.js";
+import { IIDGenerator } from "../../interfaces/IIDGenerator.js";
+import { ICreatePollUseCase } from "../../interfaces/usecases/IRoomUseCase.js";
+import { IRoomRepository } from "../../repositories/IRoomRepository.js";
+import { DI_TOKENS } from "../../../domain/constants/identifier.js";
+import { RoomSnapshot } from "../../../domain/entities/Room.js";
 
 @injectable()
 export class CreatePollUseCase implements ICreatePollUseCase {

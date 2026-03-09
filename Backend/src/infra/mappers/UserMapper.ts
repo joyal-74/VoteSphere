@@ -1,4 +1,4 @@
-import { User } from "../../domain/entities/User";
+import { User } from "../../domain/entities/User.js";
 
 export class UserMapper {
     static toDomain(raw: any): User {

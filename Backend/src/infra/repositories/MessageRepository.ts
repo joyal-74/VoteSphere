@@ -1,8 +1,8 @@
 import { Types } from "mongoose";
-import { IMessageRepository } from "../../app/repositories/IMessageRepository";
-import { Message } from "../../domain/entities/Message";
-import { MessageModel } from "../database/models/MessageModel";
-import { MessageMapper } from "../mappers/MessageMapper";
+import { IMessageRepository } from "../../app/repositories/IMessageRepository.js";
+import { Message } from "../../domain/entities/Message.js";
+import { MessageModel } from "../database/models/MessageModel.js";
+import { MessageMapper } from "../mappers/MessageMapper.js";
 
 export class MessageRepository implements IMessageRepository {
 

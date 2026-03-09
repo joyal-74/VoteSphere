@@ -1,10 +1,10 @@
 import { injectable, inject } from "tsyringe";
-import { DI_TOKENS } from "../../../domain/constants/identifier";
-import { ICreateUserUseCase, IFindUserUseCase, ILoginUserUseCase, ILogoutUseCase } from "../../../app/interfaces/usecases/ICreateUserUseCase";
-import { IHttpRequest } from "../interfaces/IHttp";
-import { HttpResponse, IHttpResult } from "../../../infra/utils/HttpResponse";
-import { TokenService } from "../../../infra/services/TokenService";
-import { AppError } from "../../../domain/errors/AppError";
+import { DI_TOKENS } from "../../../domain/constants/identifier.js";
+import { ICreateUserUseCase, IFindUserUseCase, ILoginUserUseCase, ILogoutUseCase } from "../../../app/interfaces/usecases/ICreateUserUseCase.js";
+import { IHttpRequest } from "../interfaces/IHttp.js";
+import { HttpResponse, IHttpResult } from "../../../infra/utils/HttpResponse.js";
+import { TokenService } from "../../../infra/services/TokenService.js";
+import { AppError } from "../../../domain/errors/AppError.js";
 
 @injectable()
 export class AuthController {

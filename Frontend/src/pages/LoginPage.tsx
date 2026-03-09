@@ -24,9 +24,6 @@ const LoginPage: React.FC = () => {
 
             <main className="w-full max-w-md relative z-10">
                 <header className="text-center mb-10 space-y-4">
-                    {/* <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-400 text-xs font-bold tracking-widest uppercase">
-                        <Sparkles size={12} /> Welcome Back
-                    </div> */}
                     <h1 className="text-5xl font-black tracking-tight bg-linear-to-b from-white via-primary-400 to-accent-400 bg-clip-text text-transparent">
                         VoteSphere
                     </h1>

@@ -1,6 +1,7 @@
 export interface UserSnapshot {
     id?: string;
     userId: string;
+    avatar: string;
     username: string;
     createdAt?: Date;
 }
@@ -8,6 +9,7 @@ export interface UserSnapshot {
 export class User {
     private _id?: string;
     private _userId: string;
+    private _avatar: string;
     private _username: string;
     private _createdAt?: Date;
 
@@ -15,6 +17,7 @@ export class User {
     constructor(
         userId: string,
         username: string,
+        avatar: string,
         id?: string,
         createdAt? : Date
     ) {
@@ -22,6 +25,7 @@ export class User {
 
         this._id = id;
         this._userId = userId;
+        this._avatar = avatar;
         this._username = username;
         this._createdAt = createdAt
     }
@@ -38,6 +42,10 @@ export class User {
         return this._userId;
     }
 
+    get avatar() {
+        return this._avatar;
+    }
+
     get createdAt() {
         return this._createdAt;
     }
@@ -46,6 +54,7 @@ export class User {
         return {
             id: this._id,
             userId: this._userId,
+            avatar: this._avatar,
             username: this._username,
             createdAt: this._createdAt
         };

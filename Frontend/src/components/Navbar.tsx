@@ -29,7 +29,7 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen, toggleSidebar }) => {
             </div>
 
             <div className="flex items-center gap-4">
-                <UserDropdown username={user?.username} />
+                <UserDropdown user={user!} />
             </div>
         </nav>
     );

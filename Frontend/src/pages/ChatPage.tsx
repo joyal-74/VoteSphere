@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams, useOutletContext } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import CreatePollModal from "./CreatePollModal";
 import LoadingOverlay from "../components/LoadingOverlay";
 import { useChatLogic } from "../hooks/useChatLogic";
@@ -7,9 +7,6 @@ import ChatArea from "../components/ChatArea";
 
 const ChatPage: React.FC = () => {
     const { roomId } = useParams<{ roomId: string }>();
-
-    const { setIsSidebarOpen } = useOutletContext<{ setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>> }>();
-
     const [isPollModalOpen, setIsPollModalOpen] = useState(false);
 
     const {
@@ -47,24 +44,21 @@ const ChatPage: React.FC = () => {
             />
 
             <ChatArea
-                roomTitle={currentRoom.title}
-                roomInitial={currentRoom.title.charAt(0).toUpperCase()}
+                room={currentRoom}
                 currentUser={user}
                 messages={messages}
-                polls={currentRoom.polls}
+                messageText={messageText}
                 replyTo={replyTo}
-                onVote={handleVote}
+                setReplyTo={setReplyTo}
                 editingMessage={editingMessage}
                 onStartEditing={startEditing}
                 onCancelAction={cancelAction}
-                setReplyTo={setReplyTo}
-                messageText={messageText}
                 typingUser={typingUser}
                 scrollRef={scrollRef}
-                onToggleSidebar={() => setIsSidebarOpen(true)}
                 onTogglePollModal={() => setIsPollModalOpen(true)}
                 onSendMessage={handleSendMessage}
                 onInputChange={handleInputChange}
+                onVote={handleVote}
             />
         </>
     );

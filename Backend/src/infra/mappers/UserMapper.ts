@@ -5,6 +5,7 @@ export class UserMapper {
         return new User(
             raw.userId,
             raw.username,
+            raw.avatar,
             raw._id.toString(),
             raw.createdAt
         );
@@ -13,6 +14,7 @@ export class UserMapper {
     static toPersistence(user: User) {
         return {
             userId: user.userId,
+            avatar: user.avatar,
             username: user.username,
             _id: user.id,
             createdAt: user.createdAt

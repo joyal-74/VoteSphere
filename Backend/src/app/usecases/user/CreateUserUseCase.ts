@@ -14,6 +14,7 @@ export class CreateUserUseCase implements ICreateUserUseCase {
     ) {}
 
     async execute(data: CreateUserDTO): Promise<User> {
+        console.log(data)
         const existingUser = await this._userRepository.findByUsername(data.username);
         
         if (existingUser) {
@@ -25,6 +26,7 @@ export class CreateUserUseCase implements ICreateUserUseCase {
         const user = new User(
             userId,
             data.username,
+            data.avatar
         );
 
         await this._userRepository.save(user);

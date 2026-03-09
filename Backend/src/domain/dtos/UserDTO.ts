@@ -1,6 +1,6 @@
 export interface CreateUserDTO {
     username: string;
-    avathar: string;
+    avatar: string;
 }
 
 export interface LoginUserDTO {

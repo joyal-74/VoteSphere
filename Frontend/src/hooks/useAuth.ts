@@ -15,48 +15,44 @@ export const useAuth = () => {
     const handleLogin = async (username: string) => {
         if (!username.trim()) return toast.error('Enter a username');
 
-        const result = await dispatch(loginUser({ username }));
+        try {
+            await dispatch(loginUser({ username })).unwrap();
+            
+            const userRooms = await dispatch(getUserRooms()).unwrap();
 
-        if (loginUser.fulfilled.match(result)) {
-            const roomsAction = await dispatch(getUserRooms());
-            const userRooms = roomsAction.payload;
-
-            if (userRooms && userRooms.length > 0) {
+            if (userRooms?.length > 0) {
                 navigate(`/rooms/${userRooms[0].id}`);
             } else {
                 navigate('/lobby');
             }
-        } else {
-            toast.error(result.payload as string || 'Login failed');
+        } catch (err) {
+            toast.error(err as string || 'Login failed');
         }
     };
 
     const handleSignUp = async (username: string, avatar?: string) => {
+        console.log(avatar, 'jj')
         if (!username.trim()) return toast.error('Username is required');
 
-        const result = await dispatch(signUpUser({ username, avatar }));
-
-        if (signUpUser.fulfilled.match(result)) {
+        try {
+            await dispatch(signUpUser({ username, avatar })).unwrap();
             toast.success('Account created!');
             navigate('/rooms');
-        } else {
-            toast.error(result.payload as string || 'Signup failed');
+        } catch (err) {
+            toast.error(err as string || 'Signup failed');
         }
     };
 
     const handleLogout = useCallback(async () => {
         try {
             await dispatch(logoutUser()).unwrap();
-
-            dispatch(logout());
-
             toast.success('Logged out successfully');
-            navigate('/login');
         } catch (err) {
-            console.log(err)
+            console.error('Logout error:', err);
+            toast.error('Session cleared');
+        } finally {
             dispatch(logout());
             navigate('/login');
-            toast.error('Session cleared');
         }
     }, [dispatch, navigate]);
 

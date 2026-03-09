@@ -33,8 +33,8 @@ export class AuthController {
     };
 
     public signup = async (request: IHttpRequest): Promise<IHttpResult> => {
-        const { username, avathar } = request.body;
-        const user = await this._createUserUseCase.execute({ username, avathar });
+        const { username, avatar } = request.body;
+        const user = await this._createUserUseCase.execute({ username, avatar });
         const snapshot = user.getSnapshot();
 
         const tokens = this._tokenService.generateTokens({

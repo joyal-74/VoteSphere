@@ -33,7 +33,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, rooms }) => {
                         >
                             {/* Icon/Initial Box */}
                             <div className={`
-                                w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center text-xs shrink-0 font-bold group-hover:scale-110 transition-all
+                                w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-xs shrink-0 font-bold transition-all
                             `}>
                                 {room.title?.charAt(0) ?? '?'}
                             </div>

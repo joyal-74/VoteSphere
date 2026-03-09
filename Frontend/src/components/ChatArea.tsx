@@ -1,13 +1,11 @@
 import React, { useMemo, useState } from "react";
-import { Send, BarChart3, Search, MoreVertical, Menu, Smile, Reply, X, Check, Pencil } from "lucide-react";
+import { Send, BarChart3, Reply, X, Check, Pencil } from "lucide-react";
 import MessageDropdown from "./MessageDropdown";
 
 interface ChatAreaProps {
-    roomTitle: string;
-    roomInitial: string;
+    room: any;
     currentUser: { id: string; username: string } | null;
     messages: any[];
-    polls: any[];
     messageText: string;
     replyTo: any | null;
     setReplyTo: (msg: any | null) => void;
@@ -16,7 +14,6 @@ interface ChatAreaProps {
     onCancelAction: () => void;
     typingUser: string | null;
     scrollRef: React.RefObject<HTMLDivElement | null>;
-    onToggleSidebar: () => void;
     onTogglePollModal: () => void;
     onSendMessage: () => void;
     onInputChange: (val: string) => void;
@@ -24,11 +21,9 @@ interface ChatAreaProps {
 }
 
 const ChatArea: React.FC<ChatAreaProps> = ({
-    roomTitle,
-    roomInitial,
+    room,
     currentUser,
     messages,
-    polls,
     messageText,
     replyTo,
     setReplyTo,
@@ -37,7 +32,6 @@ const ChatArea: React.FC<ChatAreaProps> = ({
     onCancelAction,
     typingUser,
     scrollRef,
-    onToggleSidebar,
     onTogglePollModal,
     onSendMessage,
     onInputChange,
@@ -45,15 +39,23 @@ const ChatArea: React.FC<ChatAreaProps> = ({
 }) => {
     const [menuData, setMenuData] = useState<{ msg: any, x: number, y: number } | null>(null);
 
-    const combinedStream = useMemo(() => {
-        const allItems = [
-            ...messages.map(m => ({ ...m, streamType: 'message' })),
-            ...(polls || []).map(p => ({ ...p, streamType: 'poll' }))
-        ];
-        return allItems.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
-    }, [messages, polls]);
+    const roomTitle = room.title;
+    const roomInitial = room.title.charAt(0).toUpperCase();
 
-    console.log(polls)
+    const combinedStream = useMemo(() => {
+        const currentMessages = messages || [];
+        const currentPolls = room?.polls || [];
+
+        const allItems = [
+            ...currentMessages.map(m => ({ ...m, streamType: 'message' })),
+            ...currentPolls.map((p: any) => ({ ...p, streamType: 'poll' }))
+        ];
+
+        return allItems.sort((a, b) =>
+            new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+        );
+
+    }, [messages, room.polls]);
 
     const handleMessageClick = (e: React.MouseEvent, item: any) => {
         if (item.streamType === 'poll') return;
@@ -81,19 +83,13 @@ const ChatArea: React.FC<ChatAreaProps> = ({
             {/* 1. Header */}
             <header className="h-16 shrink-0 border-b border-white/5 flex items-center justify-between px-4 md:px-6 bg-surface-900/30 backdrop-blur-md z-10">
                 <div className="flex items-center gap-3 min-w-0">
-                    <button className="p-1.5 hover:bg-surface-800 rounded-lg md:hidden text-surface-400" onClick={onToggleSidebar}><Menu size={20} /></button>
-                    <div className="w-9 h-9 rounded-xl bg-linear-to-br from-primary-500 to-primary-600 flex items-center justify-center font-bold text-white shadow-lg shrink-0">{roomInitial}</div>
+                    <div className="w-9 h-9 rounded-full bg-linear-to-br from-primary-500 to-primary-600 flex items-center justify-center font-bold text-white shadow-lg shrink-0">{roomInitial}</div>
                     <div className="min-w-0">
                         <h3 className="font-bold text-white text-sm md:text-base truncate leading-tight">{roomTitle}</h3>
                         <div className="flex items-center gap-1.5 text-surface-400">
-                            <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                            <p className="text-[10px] font-medium tracking-wide uppercase">Live</p>
+                            <p className="text-[10px] font-medium tracking-wide">{room.users.length} Members</p>
                         </div>
                     </div>
-                </div>
-                <div className="flex items-center gap-2 text-surface-400">
-                    <button className="p-2 hover:bg-surface-800 rounded-lg transition-colors"><Search size={18} /></button>
-                    <button className="p-2 hover:bg-surface-800 rounded-lg transition-colors"><MoreVertical size={18} /></button>
                 </div>
             </header>
 
@@ -145,8 +141,8 @@ const ChatArea: React.FC<ChatAreaProps> = ({
                                                                 disabled={!item.isActive || hasVoted}
                                                                 onClick={() => onVote?.(item.id, option.id)}
                                                                 className={`w-full relative overflow-hidden h-11 rounded-xl border transition-all flex items-center px-4 ${hasVoted
-                                                                        ? 'border-transparent bg-white/5 cursor-default'
-                                                                        : 'border-white/10 hover:border-primary-500/50 hover:bg-primary-500/5'
+                                                                    ? 'border-transparent bg-white/5 cursor-default'
+                                                                    : 'border-white/10 hover:border-primary-500/50 hover:bg-primary-500/5'
                                                                     }`}
                                                             >
                                                                 {/* Progress Bar Background */}
@@ -191,7 +187,7 @@ const ChatArea: React.FC<ChatAreaProps> = ({
                                         /* --- ORIGINAL MESSAGE BUBBLE LOGIC --- */
                                         <div
                                             onClick={(e) => handleMessageClick(e, item)}
-                                            className={`relative px-3 py-2 rounded-2xl shadow-sm border cursor-pointer transition-all min-w-0 outline-none ${isSelected ? 'scale-[1.02]' : ''} ${isMe ? 'bg-primary-600 text-white border-primary-500 rounded-tr-none' : 'bg-surface-900 text-surface-50 border-white/5 rounded-tl-none'}`}
+                                            className={`relative px-2 py-2 rounded-2xl shadow-sm border cursor-pointer transition-all min-w-0 outline-none ${isSelected ? 'scale-[1.02]' : ''} ${isMe ? 'bg-primary-600 text-white border-primary-500 rounded-tr-none' : 'bg-surface-900 text-surface-50 border-white/5 rounded-tl-none'}`}
                                         >
                                             {repliedMessage && (
                                                 <div className={`mb-1.5 flex flex-col border-l-2 rounded-md px-2 py-1 text-xs ${isMe ? 'bg-black/20 border-white/40' : 'bg-black/30 border-primary-500/80'}`}>
@@ -203,7 +199,7 @@ const ChatArea: React.FC<ChatAreaProps> = ({
                                                 <span className="text-sm md:text-[15px] leading-relaxed whitespace-pre-wrap wrap-break-words pr-1">{item.content}</span>
                                                 <span className="inline-flex items-center gap-1 ml-2 align-baseline translate-y-0.5 opacity-60 select-none">
                                                     {item.editedAt && <span className="text-[9px] italic">edited</span>}
-                                                    <span className="text-[9px] font-medium uppercase whitespace-nowrap">{new Date(item.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false })}</span>
+                                                    <span className="text-[9px] font-medium uppercase whitespace-nowrap">{new Date(item.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}</span>
                                                 </span>
                                             </div>
                                         </div>
@@ -256,7 +252,6 @@ const ChatArea: React.FC<ChatAreaProps> = ({
                         <button onClick={onTogglePollModal} className="p-2.5 rounded-xl bg-surface-800 hover:bg-surface-700 text-surface-400 shrink-0 transition-colors"><BarChart3 size={18} /></button>
                         <input type="text" autoFocus value={messageText} onChange={(e) => onInputChange(e.target.value)} onKeyDown={(e) => e.key === "Enter" && onSendMessage()} placeholder={editingMessage ? "Save changes..." : "Type your message..."} className="flex-1 bg-transparent border-none px-2 py-1 text-sm outline-none text-white placeholder:text-surface-500" />
                         <div className="flex items-center gap-1">
-                            <button className="p-2 text-surface-500 hover:text-primary-400 hidden sm:block"><Smile size={20} /></button>
                             <button onClick={onSendMessage} disabled={!messageText.trim()} className="p-2.5 rounded-xl bg-primary-500 hover:bg-primary-600 text-white disabled:opacity-30 transition-all active:scale-95">
                                 {editingMessage ? <Check size={18} /> : <Send size={18} />}
                             </button>
